@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom"
+import { StyledNavigation } from "./NavigationStyled"
 
 const Navigation = () => {
   return (
-    <div>
+    <StyledNavigation>
       <NavLink to='/'>Home</NavLink>
       <NavLink to='teachers'>Teachers</NavLink>
-    </div>
+      <NavLink to='favirites'>Favorites</NavLink>
+    </StyledNavigation>
   )
 }
 
