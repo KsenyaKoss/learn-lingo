@@ -1,38 +1,67 @@
-import { useFormik } from "formik";
+import Form from "../Form/Form";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile
+} from "firebase/auth";
 import {
   ModalBody,
   Overlay,
-  StyledError,
-  StyledEyeIcon,
-  StyledForm,
   StyledIconClose,
-  StyledInput,
-  StyledInputWrp,
   StyledP,
-  StyledSubmitButton,
   StyledTitle,
 } from "./LoginModalStyled";
-import { yupSchema } from "../yupValidationSchema";
-
-
-const onSubmit = (values, actions) => {
-    actions.resetForm()
-}
-
-
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../redux/Auth/authSlice";
 
 const LoginModal = ({ view, closeModal }) => {
-  const { values, touched, errors, handleBlur, handleChange, handleSubmit, isSubmitting } =
-    useFormik({
-      initialValues: {
-        name: "",
-        email: "",
-        password: "",
-      },
-      validationSchema: yupSchema,
-      onSubmit,
-    });
-  console.log(errors);
+  const dispatch = useDispatch();
+  const auth = getAuth();
+
+  const newUser = ({ name, email, password }) => {
+    console.log(name, email, password);
+    if (view === "loginView") {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(({user}) => {
+          dispatch(
+            setUser({
+              name: user.displayName,
+              email: user.email,
+              token: user.accessToken,
+              id: user.uid,
+            })
+          );
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          const displayName = name;
+         console.log(user, displayName);
+          updateProfile(user, {
+            displayName: displayName,
+          }).then(()=> {
+            dispatch(
+              setUser({
+                name: user.displayName,
+                email: user.email,
+                token: user.accessToken,
+                id: user.uid,
+              })
+            );
+          }).catch((profileError) => {
+            // Обработка ошибки при добавлении имени к профилю.
+          })})
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+  }}
   return (
     <Overlay>
       <ModalBody>
@@ -40,73 +69,20 @@ const LoginModal = ({ view, closeModal }) => {
           {view === "loginView" ? "Log In" : "Registration"}
         </StyledTitle>
         <StyledIconClose onClick={closeModal} />
-        <StyledP>
-          Welcome back! Please enter your credentials to access your account and
-          continue your search for an teacher.
-        </StyledP>
-        <StyledForm onSubmit={handleSubmit}>
-          {view === "registrationModal" && (
-            <StyledInput
-              type="text"
-              name="name"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="Name"
-              className={
-                touched.name && !errors.name
-                  ? "valid"
-                  : errors.name && touched.name
-                  ? "invalid"
-                  : ""
-              }
-            />
-         
-          )}
-             {touched.name && errors.name && <StyledError className="error">{errors.name}</StyledError>}
-          <StyledInputWrp>
-            <StyledInput
-              type="email"
-              name="email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="Email"
-              className={
-                touched.email && !errors.email
-                  ? "valid"
-                  : errors.email && touched.email
-                  ? "invalid"
-                  : ""
-              }
-            />
-             {touched.email && errors.email && <StyledError className="error">{errors.email}</StyledError>}
-          </StyledInputWrp>
-          <StyledInputWrp>
-            <StyledInputWrp>
-              <StyledInput
-                type="password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="Password"
-                className={
-                  touched.password && !errors.password
-                    ? "valid"
-                    : errors.password && touched.password
-                    ? "invalid"
-                    : ""
-                }
-              />
-               {touched.password && errors.password && <StyledError className="error">{errors.password}</StyledError>}
-            </StyledInputWrp>
-            <StyledEyeIcon />
-          </StyledInputWrp>
-          <StyledSubmitButton disabled={isSubmitting}   type="submit">
-            {view === "loginView" ? "Log In" : "Sign Up"}
-          </StyledSubmitButton>
-        </StyledForm>
+        {view === "loginView" ? (
+          <StyledP>
+            {" "}
+            Welcome back! Please enter your credentials to access your account
+            and continue your search for an teacher.
+          </StyledP>
+        ) : (
+          <StyledP>
+            Thank you for your interest in our platform! In order to register,
+            we need some information. Please provide us with the following
+            information
+          </StyledP>
+        )}
+        <Form view={view} user={newUser} closeModal={closeModal} />
       </ModalBody>
     </Overlay>
   );

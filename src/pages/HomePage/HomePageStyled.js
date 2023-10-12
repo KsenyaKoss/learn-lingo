@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const StyledList = styled.ul`
-/* max-width: 1312px; */
+max-width: 1312px;
 display: flex;
 gap: 100px;
 align-items: center;
 justify-content: center;
 border-radius: 30px;
-border: 1.5px dashed var(--orange);
+border: 2px dashed var(--orange);
+border-image: url('dotted-line.png') 10 round;
 margin-top: 24px;
 padding: 40px ;
 

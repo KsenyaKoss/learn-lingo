@@ -4,6 +4,7 @@
 
 
  :root {
+  
     font-family: 'Roboto', sans-serif;
     max-width: 1440px;
     padding: 0;
@@ -24,7 +25,7 @@
     --light-pink: #F0AA8D;
     --light-pink-hover: #F4C8BA;
     --online-color: #38CD3E; 
-    --hover-transition: 1s ease-in-out;
+    --hover-transition: 400ms ease-in-out;
     
    
 }  

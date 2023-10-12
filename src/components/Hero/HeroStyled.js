@@ -4,9 +4,10 @@ import styled from "styled-components";
 export const HeroStyled = styled.div`
 display: flex;
 gap: 24px;
-width: 1312px;
+max-width: 1312px;
 align-items: center;
 justify-content: center;
+
 `
 
 export const StyledH1 = styled.h1`
@@ -38,7 +39,7 @@ margin-bottom: 64px;
 
 
 export const HeroTextStyled = styled.div`
-max-width: 720px;
+width: 720px;
 max-height: 530px;
 background-color: var(--secondary-bgr-color);
 border-radius: 30px;
