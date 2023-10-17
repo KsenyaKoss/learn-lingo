@@ -6,7 +6,7 @@ max-width: 1184px;
 display: flex;
 align-items: center;
 justify-content: space-between;
-margin-top: 20px;
+margin-top: 30px;
 margin-left: auto;
 margin-right: auto;
 `
