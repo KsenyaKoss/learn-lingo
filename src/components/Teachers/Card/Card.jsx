@@ -1,12 +1,32 @@
-// import  OpenBook  from "../../../assets/book-open-01.svg";
-import Star from "../../../assets/star.svg";
-// import Heart  from "../../../assets/heart.svg";
-// import LikeHeart  from "../../../assets/heart-hover.svg";
+import  OpenBook  from "../../../assets/book-open-01.jsx"
+import Star from "../../../assets/star.jsx";
+import Heart  from "../../../assets/heart.jsx";
+import LikeHeart  from "../../../assets/heart-hover.jsx";
 import Reviews from "../Reviews/Reviews";
 import Button from "../LevelsButtons/Button";
+import Container from "../../Container/Container";
+import {
+  ButtonLikeStyled,
+  CardWrp,
+  ImgStyled,
+  ImgWrp,
+  InfoStyled,
+  InfoTitle,
+  LevelListWrp,
+  MainInfoWrp,
+  NameStyled,
+  NameWrp,
+  ReadMoreButton,
+  StyledItem,
+  StyledUpperList,
+  TextContainer,
+  UpperWrp,
+} from "./CardStyled";
+import { useState } from "react";
 
 const Card = ({ item }) => {
-  console.log(item);
+  const [moreInfoVisible, setMoreInfoVisible] = useState(false);
+  //  console.log(item);
   const {
     avatar_url,
     name,
@@ -22,39 +42,69 @@ const Card = ({ item }) => {
     levels,
   } = item;
   return (
-    <div>
-      <div>
-        {" "}
-        <img src={avatar_url} alt="avatar" />
-      </div>
-      <ul>
-        <li>Lessons online</li>
-        <li>
-          Lessons done: <p>{lessons_done}</p>
-        </li>
-        <li>
+    <Container>
+      <CardWrp>
+        <ImgWrp>
           {" "}
-          Rating: <p>{rating}</p>
-        </li>
-        <li>
-          Price / 1 hour: <p>{price_per_hour}</p>
-        </li>
-      </ul>
+          <ImgStyled src={avatar_url} alt="avatar" />
+        </ImgWrp>
+        <TextContainer>
+         <UpperWrp>
+         <NameWrp>
+            <InfoTitle>Languages</InfoTitle>
+            <NameStyled>{`${name} ${surname}`}</NameStyled>
+          </NameWrp>
 
-      <h4>Languages</h4>
-      <h2>{`${name} ${surname}`}</h2>
-      <p>Speaks: {`${languages}`}</p>
-      <p>Lesson Info: {`${lesson_info}`}</p>
-      <p>Conditions: {`${conditions}`}</p>
-      <button>Read more</button>
-      <p>{experience}</p>
-      {reviews.map((el) => (
-        <Reviews el={el} />
-      ))}
-      {levels.map((el) => (
-        <Button title={el} />
-      ))}
-    </div>
+          <StyledUpperList>
+            <StyledItem><OpenBook/>Lessons online</StyledItem>
+            <StyledItem>
+              Lessons done: <span>{lessons_done}</span>
+            </StyledItem>
+            <StyledItem>
+              {" "}
+              <Star/>
+              Rating: <span>{rating}</span>
+            </StyledItem>
+            <StyledItem>
+              Price / 1 hour: <span>{`${price_per_hour}$`}</span>
+            </StyledItem>
+            <ButtonLikeStyled> <Heart/> </ButtonLikeStyled>
+          </StyledUpperList>
+         </UpperWrp>
+       
+
+          <MainInfoWrp>
+            <InfoTitle>
+              Speaks:{" "}
+              <InfoStyled className="languages">{`${languages}`}</InfoStyled>
+            </InfoTitle>
+            <InfoTitle>
+              Lesson Info: <InfoStyled>{`${lesson_info}`}</InfoStyled>
+            </InfoTitle>
+            <InfoTitle>
+              Conditions: <InfoStyled>{`${conditions}`}</InfoStyled>
+            </InfoTitle>
+          </MainInfoWrp>
+          {!moreInfoVisible ? (
+            <ReadMoreButton onClick={() => setMoreInfoVisible(true)}>
+              Read more
+            </ReadMoreButton>
+          ) : (
+            <>
+              <p>{experience}</p>
+              {reviews.map((el, index) => (
+                <Reviews key={index} el={el} />
+              ))}
+            </>
+          )}
+          <LevelListWrp>
+            {levels.map((el, index) => (
+              <Button key={index} title={el} />
+            ))}
+          </LevelListWrp>
+        </TextContainer>
+      </CardWrp>
+    </Container>
   );
 };
 

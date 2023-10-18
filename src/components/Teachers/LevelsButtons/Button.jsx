@@ -1,6 +1,8 @@
+import { LevelButtonStyled } from "./ButtonStyled"
+
 const ButtonStyled = ({title}) => {
     return (
-      <button>{title}</button>
+      <LevelButtonStyled>{title}</LevelButtonStyled>
     )
   }
   export default ButtonStyled

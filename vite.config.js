@@ -6,5 +6,6 @@ import reactSvgPlugin from 'vite-plugin-react-svg';
 export default defineConfig({
   plugins: [
     react(),
-    reactSvgPlugin() ],
+    reactSvgPlugin(),
+   ],
 })

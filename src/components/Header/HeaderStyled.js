@@ -6,9 +6,9 @@ max-width: 1184px;
 display: flex;
 align-items: center;
 justify-content: space-between;
-margin-top: 30px;
-margin-left: auto;
-margin-right: auto;
+margin: 10px auto 10px auto;
+/* margin-left: auto;
+margin-right: auto; */
 `
 
 
