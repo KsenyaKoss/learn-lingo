@@ -2,16 +2,20 @@ import { Field, Formik } from "formik";
 import data from "./filtersList.json";
 import { useDispatch } from "react-redux";
 import { setFilter } from "../../redux/Teachers/teachersSlice";
+import { FilterWrp, OneFilterWrp, OptionStyled, StyledLabel, StyledSelect } from "./FilterStyled";
+
 
 const Filter = () => {
     const dispatch = useDispatch();
   return (
-    <div>
+    <FilterWrp>
       <Formik initialValues={{ languages: "", levels: "", price_per_hour: "" }}>
         {(props) => (
           <>
+         <OneFilterWrp>
+         <StyledLabel htmlFor="languages">Languages</StyledLabel>
             <Field
-              as="select"
+              as={StyledSelect}
               name="languages"
               onChange={(e) => {
                 props.setFieldValue("languages", e.target.value, false);
@@ -19,13 +23,16 @@ const Filter = () => {
               }}
             >
               {data.language.map((el) => (
-                <option key={el} value={el}>
+                <OptionStyled key={el} value={el}>
                   {el}
-                </option>
+                </OptionStyled>
               ))}
             </Field>
+         </OneFilterWrp>
+            <OneFilterWrp>
+            <StyledLabel htmlFor="levels">Level of knowledge</StyledLabel>
             <Field
-              as="select"
+              as={StyledSelect}
               name="levels"
               onChange={(e) => {
                 props.setFieldValue("levels", e.target.value, false);
@@ -33,13 +40,16 @@ const Filter = () => {
               }}
             >
               {data.levels.map((el) => (
-                <option key={el} value={el}>
+                <OptionStyled  key={el} value={el}>
                   {el}
-                </option>
+                </OptionStyled>
               ))}
             </Field>
+            </OneFilterWrp>
+           <OneFilterWrp>
+           <StyledLabel htmlFor="price_per_hour">Price</StyledLabel>
             <Field
-              as="select"
+              as={StyledSelect}
               name="price_per_hour"
               onChange={(e) => {
                 props.setFieldValue("price_per_hour", e.target.value, false);
@@ -47,15 +57,16 @@ const Filter = () => {
               }}
             >
               {data.price.map((el) => (
-                <option key={el} value={el}>
+                <OptionStyled key={el} value={el}>
                   {`${el} $`}
-                </option>
+                </OptionStyled>
               ))}
             </Field>
+           </OneFilterWrp>
           </>
         )}
       </Formik>
-    </div>
+    </FilterWrp>
   );
 };
 

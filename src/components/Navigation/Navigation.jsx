@@ -1,15 +1,16 @@
-import { NavLink } from "react-router-dom";
-import { StyledNavigation } from "./NavigationStyled";
+import { NavLink, useLocation } from "react-router-dom";
+import { NavLinkStyled, StyledNavigation } from "./NavigationStyled";
 import useAuth from "../../hooks/use-auth";
 
 const Navigation = () => {
   const { isAuth } = useAuth();
+  const location = useLocation();
   console.log(isAuth);
   return (
     <StyledNavigation>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="teachers">Teachers</NavLink>
-      {isAuth && <NavLink to="favorites">Favorites</NavLink>}
+      <NavLinkStyled to="/" className={location.pathname === ('/') && 'active'}>Home</NavLinkStyled>
+      <NavLinkStyled to="teachers" className={location.pathname.includes('/teachers') && 'active'}>Teachers</NavLinkStyled>
+      {isAuth && <NavLinkStyled to="favorites" className={location.pathname.includes("/favorites") && 'active'}>Favorites</NavLinkStyled>}
     </StyledNavigation>
   );
 };

@@ -1,10 +1,18 @@
+import { useSelector } from "react-redux";
+import Card from "../../components/Teachers/Card/Card";
+import { StyledPage } from "./FavoritesPageStyled";
 
 const FavoritesPage = () => {
-  return (
-    <div>
-      Favorites
-    </div>
-  )
-}
+  const favoriteTeachers = useSelector((state) => state.teachers.favorites);
 
-export default FavoritesPage
+  return (
+    <StyledPage>
+      {favoriteTeachers?.length !== 0 &&
+        favoriteTeachers.map((teacher, index) => (
+          <Card key={index} item={teacher} />
+        ))}
+    </StyledPage>
+  );
+};
+
+export default FavoritesPage;

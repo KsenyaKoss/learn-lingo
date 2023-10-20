@@ -10,7 +10,7 @@ export const LevelButtonStyled = styled.button`
   border: 1px solid rgba(18, 20, 23, 0.2);
   transition:  var(--hover-transition);
 
-  &:hover {
+  &.active {
     background-color: var(--orange);
     border-color: transparent;
   }

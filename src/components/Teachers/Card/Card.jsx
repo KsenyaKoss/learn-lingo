@@ -1,7 +1,7 @@
-import  OpenBook  from "../../../assets/book-open-01.jsx"
+import OpenBook from "../../../assets/book-open-01.jsx";
 import Star from "../../../assets/star.jsx";
-import Heart  from "../../../assets/heart.jsx";
-import LikeHeart  from "../../../assets/heart-hover.jsx";
+import Heart from "../../../assets/heart.jsx";
+import LikeHeart from "../../../assets/heart-hover.jsx";
 import Reviews from "../Reviews/Reviews";
 import Button from "../LevelsButtons/Button";
 import Container from "../../Container/Container";
@@ -23,10 +23,25 @@ import {
   UpperWrp,
 } from "./CardStyled";
 import { useState } from "react";
+import useAuth from "../../../hooks/use-auth.js";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorites } from "../../../redux/Teachers/teachersSlice.js";
 
-const Card = ({ item }) => {
+const Card = ({ item, filter }) => {
   const [moreInfoVisible, setMoreInfoVisible] = useState(false);
-  //  console.log(item);
+  const favoriteTeachers = useSelector(state=> state.teachers.favorites);
+  const isFavorite = favoriteTeachers?.includes(item);
+  const { isAuth } = useAuth();
+  const dispatch = useDispatch();
+
+  const handleLikeTeacher = (teacher) => {
+    if (isAuth) {
+      console.log(isAuth);
+      dispatch(addToFavorites(teacher));
+      return;
+    }
+    alert("Цей функціонал доступний тільки авторизованим користувачам");
+  };
   const {
     avatar_url,
     name,
@@ -49,29 +64,33 @@ const Card = ({ item }) => {
           <ImgStyled src={avatar_url} alt="avatar" />
         </ImgWrp>
         <TextContainer>
-         <UpperWrp>
-         <NameWrp>
-            <InfoTitle>Languages</InfoTitle>
-            <NameStyled>{`${name} ${surname}`}</NameStyled>
-          </NameWrp>
+          <UpperWrp>
+            <NameWrp>
+              <InfoTitle>Languages</InfoTitle>
+              <NameStyled>{`${name} ${surname}`}</NameStyled>
+            </NameWrp>
 
-          <StyledUpperList>
-            <StyledItem><OpenBook/>Lessons online</StyledItem>
-            <StyledItem>
-              Lessons done: <span>{lessons_done}</span>
-            </StyledItem>
-            <StyledItem>
-              {" "}
-              <Star/>
-              Rating: <span>{rating}</span>
-            </StyledItem>
-            <StyledItem>
-              Price / 1 hour: <span>{`${price_per_hour}$`}</span>
-            </StyledItem>
-            <ButtonLikeStyled> <Heart/> </ButtonLikeStyled>
-          </StyledUpperList>
-         </UpperWrp>
-       
+            <StyledUpperList>
+              <StyledItem>
+                <OpenBook />
+                Lessons online
+              </StyledItem>
+              <StyledItem>
+                Lessons done: <span>{lessons_done}</span>
+              </StyledItem>
+              <StyledItem>
+                {" "}
+                <Star />
+                Rating: <span>{rating}</span>
+              </StyledItem>
+              <StyledItem>
+                Price / 1 hour: <span>{`${price_per_hour}$`}</span>
+              </StyledItem>
+              <ButtonLikeStyled onClick={()=> handleLikeTeacher(item)}>
+                {isFavorite ? <LikeHeart/> :  <Heart />}
+              </ButtonLikeStyled>
+            </StyledUpperList>
+          </UpperWrp>
 
           <MainInfoWrp>
             <InfoTitle>
@@ -99,7 +118,7 @@ const Card = ({ item }) => {
           )}
           <LevelListWrp>
             {levels.map((el, index) => (
-              <Button key={index} title={el} />
+              <Button key={index} title={el} filter={filter} />
             ))}
           </LevelListWrp>
         </TextContainer>

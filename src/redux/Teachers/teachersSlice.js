@@ -1,16 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const filterTeachers = (teachers, filter) => {
-//   const { languages, levels, price } = filter;
-  
-// };
 
 const initialState = {
   teachers: [],
   favorites: [],
   totalHits: null,
   isLoading: false,
-  currentPage: 1,
   filter: {
     languages: "",
     levels: "",
@@ -27,7 +22,7 @@ const teachersSlice = createSlice({
       state.currentPage += 1;
     },
     addToFavorites: (state, { payload }) => {
-      state.favorites.concat(payload);
+      state.favorites.push(payload);
     },
     setFilter: (state, { payload }) => {
       state.filter = payload;
@@ -35,5 +30,5 @@ const teachersSlice = createSlice({
   },
 });
 
-export const { addTeachers, addToFavorites, setFilter } = teachersSlice.actions;
+export const { addTeachers, addToFavorites, setFilter} = teachersSlice.actions;
 export const teachersReducer = teachersSlice.reducer;

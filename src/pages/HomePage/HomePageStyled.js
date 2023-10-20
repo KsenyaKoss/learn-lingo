@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const HomePageWrp = styled.div`
+padding: 20px 64px;
+margin: 0 auto;
+width: 100%; 
+max-width: 1440px;
+`
+
 export const StyledList = styled.ul`
 max-width: 1312px;
 display: flex;

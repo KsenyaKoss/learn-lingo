@@ -11,13 +11,13 @@ const UserPlug = () => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <g id="user">
-          <g clip-path="url(#clip0_193_329)">
+          <g clipPath="url(#clip0_193_329)">
             <rect
               width="100"
               height="100"
               rx="50"
               fill="#F3F3F3"
-              fill-opacity="0.952941"
+              fillOpacity="0.952941"
             />
             <g id="Group 1456">
               <circle

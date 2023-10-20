@@ -1,8 +1,8 @@
 import { LevelButtonStyled } from "./ButtonStyled"
 
-const ButtonStyled = ({title}) => {
+const ButtonStyled = ({title, filter}) => {
     return (
-      <LevelButtonStyled>{title}</LevelButtonStyled>
+      <LevelButtonStyled className={(filter !== "" && filter === title) && "active" }>{title}</LevelButtonStyled>
     )
   }
   export default ButtonStyled
