@@ -58,7 +58,7 @@ const TeachersPage = () => {
       ) : (
         <h2>No teachers was found</h2>
       )}
-      {!(renderTeachersCount >= teachers.length) && (
+      {(!(renderTeachersCount >= teachers.length ) && filteredTeachers.length !== 0 )&& (
         <StyledButton onClick={loadMore}>Load more</StyledButton>
       )}
     </StyledPage>

@@ -24,11 +24,14 @@ const teachersSlice = createSlice({
     addToFavorites: (state, { payload }) => {
       state.favorites.push(payload);
     },
+    removeFromFavorites: (state, {payload})=> {
+     state.favorites = state.favorites.filter((el) => el.lessons_done !== payload.lessons_done);
+    },
     setFilter: (state, { payload }) => {
       state.filter = payload;
     },
   },
 });
 
-export const { addTeachers, addToFavorites, setFilter} = teachersSlice.actions;
+export const { addTeachers, addToFavorites, removeFromFavorites, setFilter} = teachersSlice.actions;
 export const teachersReducer = teachersSlice.reducer;

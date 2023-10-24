@@ -25,22 +25,30 @@ import {
 import { useState } from "react";
 import useAuth from "../../../hooks/use-auth.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addToFavorites } from "../../../redux/Teachers/teachersSlice.js";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../../redux/Teachers/teachersSlice.js";
+import Notiflix from "notiflix";
 
 const Card = ({ item, filter }) => {
   const [moreInfoVisible, setMoreInfoVisible] = useState(false);
-  const favoriteTeachers = useSelector(state=> state.teachers.favorites);
-  const isFavorite = favoriteTeachers?.includes(item);
+  const favoriteTeachers = useSelector((state) => state.teachers.favorites);
+  const isFavorite = favoriteTeachers?.some(teacher => teacher.lessons_done === item.lessons_done);
   const { isAuth } = useAuth();
   const dispatch = useDispatch();
 
   const handleLikeTeacher = (teacher) => {
-    if (isAuth) {
-      console.log(isAuth);
+    if (isAuth && !isFavorite) {
       dispatch(addToFavorites(teacher));
       return;
+    } else if (isAuth && isFavorite) {
+      dispatch(removeFromFavorites(teacher));
+      return;
     }
-    alert("Цей функціонал доступний тільки авторизованим користувачам");
+    Notiflix.Notify.warning(
+      "Цей функціонал доступний тільки авторизованим користувачам"
+    );
   };
   const {
     avatar_url,
@@ -86,8 +94,8 @@ const Card = ({ item, filter }) => {
               <StyledItem>
                 Price / 1 hour: <span>{`${price_per_hour}$`}</span>
               </StyledItem>
-              <ButtonLikeStyled onClick={()=> handleLikeTeacher(item)}>
-                {isFavorite ? <LikeHeart/> :  <Heart />}
+              <ButtonLikeStyled onClick={() => handleLikeTeacher(item)}>
+                {isFavorite ? <LikeHeart /> : <Heart />}
               </ButtonLikeStyled>
             </StyledUpperList>
           </UpperWrp>
