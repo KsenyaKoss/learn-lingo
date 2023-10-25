@@ -119,3 +119,25 @@ outline: none;
 background-color: transparent;
 cursor: pointer;
 `
+
+export const ButtonTrialLessonStyled = styled.button`
+display: flex;
+max-width: 232px;
+padding: 16px 48px;
+justify-content: center;
+align-items: center;
+border-radius: 12px;
+background: var(--orange);
+font-size: 18px;
+font-weight: 700;
+line-height: calc(28 / 18); 
+outline: none;
+border: none;
+cursor: pointer;
+transition: var(--hover-transition);
+
+&:hover {
+  background-color: var(--orange-hover);
+}
+
+`

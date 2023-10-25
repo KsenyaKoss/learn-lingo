@@ -7,6 +7,7 @@ import Button from "../LevelsButtons/Button";
 import Container from "../../Container/Container";
 import {
   ButtonLikeStyled,
+  ButtonTrialLessonStyled,
   CardWrp,
   ImgStyled,
   ImgWrp,
@@ -30,11 +31,15 @@ import {
   removeFromFavorites,
 } from "../../../redux/Teachers/teachersSlice.js";
 import Notiflix from "notiflix";
+import BookTrialLessonModal from "../../Modals/BookTrialLessonModal/BookTrialLessonModal.jsx";
 
 const Card = ({ item, filter }) => {
   const [moreInfoVisible, setMoreInfoVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const favoriteTeachers = useSelector((state) => state.teachers.favorites);
-  const isFavorite = favoriteTeachers?.some(teacher => teacher.lessons_done === item.lessons_done);
+  const isFavorite = favoriteTeachers?.some(
+    (teacher) => teacher.lessons_done === item.lessons_done
+  );
   const { isAuth } = useAuth();
   const dispatch = useDispatch();
 
@@ -50,6 +55,15 @@ const Card = ({ item, filter }) => {
       "Цей функціонал доступний тільки авторизованим користувачам"
     );
   };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  }
+
   const {
     avatar_url,
     name,
@@ -129,8 +143,12 @@ const Card = ({ item, filter }) => {
               <Button key={index} title={el} filter={filter} />
             ))}
           </LevelListWrp>
+          {moreInfoVisible && (
+            <ButtonTrialLessonStyled onClick={()=> handleOpenModal()}>Book trial lesson</ButtonTrialLessonStyled>
+          )}
         </TextContainer>
       </CardWrp>
+      {isModalOpen && <BookTrialLessonModal teacher={item} onClose={handleCloseModal}/>}
     </Container>
   );
 };

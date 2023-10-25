@@ -3,7 +3,7 @@ import { HomePageWrp, StyledItem, StyledList, StyledQuantity, StyledTitle } from
 import { statistic } from "./data.json";
 
 const HomePage = () => {
- 
+   
   return (
     <HomePageWrp>
       <Hero />

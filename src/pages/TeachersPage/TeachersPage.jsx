@@ -53,7 +53,7 @@ const TeachersPage = () => {
         filteredTeachers
           ?.slice(0, renderTeachersCount)
           .map((item, index) => (
-            <Card key={index} item={item} filter={filters.levels} />
+            <Card key={index} item={item} filter={filters.levels}/>
           ))
       ) : (
         <h2>No teachers was found</h2>
