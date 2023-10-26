@@ -47,7 +47,7 @@ export const StyledIconClose = styled(AiOutlineClose)`
 export const StyledP = styled.p`
   font-size: 16px;
   line-height: calc(22 / 16);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 export const ImgWrp = styled.div`

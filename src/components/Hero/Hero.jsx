@@ -14,6 +14,7 @@ import GreenPicture from "../../assets/images/bgrPicture-green.png";
 import LightPinkPicture from "../../assets/images/bgrPicture-light-pink.png";
 import OrangePicture from "../../assets/images/bgrPicture-orange.png";
 import PinkPicture from "../../assets/images/bgrPicture-orange.png";
+import { useNavigate} from "react-router";
 
 const pictures = [
   BluePicture,
@@ -26,6 +27,7 @@ const pictures = [
 const Hero = () => {
   const [currentPicture, setCurrentPicture] = useState("");
   const [currentColor, setCurrentColor] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const picturesKeys = Object.keys(pictures);
@@ -67,7 +69,7 @@ const Hero = () => {
           Tutors: Elevate your language proficiency to new heights by <br />
           connecting with highly qualified and experienced tutors.
         </PStyled>
-        <MainButtonStyled color={currentColor}>Get started</MainButtonStyled>
+        <MainButtonStyled color={currentColor} onClick={()=> navigate('/teachers')}>Get started</MainButtonStyled>
       </HeroTextStyled>
       <ImgWrp>
         <img src={currentPicture || Plug} alt="image" />
