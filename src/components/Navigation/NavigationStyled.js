@@ -3,9 +3,12 @@ import { NavLink } from "react-router-dom";
 
 
 export const StyledNavigation = styled.div`
+width:1220px;
 display: flex;
+/* margin-top: 20px; */
 gap: 28px;
 align-items: center;
+justify-content: center;
 
 
 
