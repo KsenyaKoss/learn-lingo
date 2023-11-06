@@ -42,7 +42,7 @@ transition: transform var(--hover-transition);
 export const LogInButtonStyled = styled.button`
 padding-top: 14px;
 padding-bottom: 14px;
-min-width: 80px;
+width: 85px;
 display: flex;
 gap: 8px;
 align-items: center;
