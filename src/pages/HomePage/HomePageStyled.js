@@ -15,7 +15,6 @@ align-items: center;
 justify-content: center;
 border-radius: 30px;
 border: 2px dashed var(--orange);
-border-image: url('dotted-line.png') 10 round;
 margin-top: 24px;
 padding: 40px ;
 
@@ -25,7 +24,6 @@ export const StyledItem = styled.li`
 display: flex;
 gap: 16px;
 align-items: center;
-
 `
 
 export const StyledQuantity = styled.span`

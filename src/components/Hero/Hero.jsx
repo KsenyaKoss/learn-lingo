@@ -55,7 +55,7 @@ const Hero = () => {
         break;
     }
   }, []);
-  console.log(currentColor);
+  
 
   return (
     <HeroStyled>
