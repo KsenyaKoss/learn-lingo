@@ -26,7 +26,6 @@ const Form = ({ view, user, closeModal }) => {
     },
     validationSchema: view === "loginView" ? yupSchemaLogIn : yupSchemaSigUp,
     onSubmit: (values, actions) => {
-      console.log(values);
       user(values);
       actions.resetForm();
       closeModal();

@@ -5,7 +5,6 @@ import useAuth from "../../hooks/use-auth";
 const Navigation = () => {
   const { isAuth } = useAuth();
   const location = useLocation();
-  console.log(isAuth);
   return (
     <StyledNavigation>
       <NavLinkStyled to="/" className={location.pathname === ('/') && 'active'}>Home</NavLinkStyled>

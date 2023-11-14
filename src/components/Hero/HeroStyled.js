@@ -6,6 +6,12 @@ export const HeroStyled = styled.div`
   max-width: 1312px;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const StyledH1 = styled.h1`
@@ -14,6 +20,10 @@ export const StyledH1 = styled.h1`
   line-height: 1, 16;
   letter-spacing: -0.96px;
   margin-bottom: 32px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 24px
+  }
 `;
 
 export const SpanStyled = styled.span`
@@ -35,12 +45,20 @@ export const SpanStyled = styled.span`
   font-style: italic;
   font-weight: 500;
 `;
+
+
+
+
 export const PStyled = styled.p`
   font-size: 16px;
   line-height: 1.38;
   letter-spacing: -0.32px;
   margin-bottom: 64px;
-`;
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+`
 
 export const HeroTextStyled = styled.div`
   width: 720px;
@@ -55,6 +73,10 @@ export const ImgWrp = styled.div`
   width: 568px;
   height: 530px;
   flex-shrink: 0;
+
+  @media screen and (max-width: 768px) {
+    width: 368px;
+  }
 `;
 
 export const StyledImg = styled.img``;
@@ -97,5 +119,11 @@ export const MainButtonStyled = styled.button`
       : color === "lightPink"
       ? "var(--light-pink-hover)"
       : "var(--secondary-text-color)"};;
+  }
+
+
+   @media screen and (max-width: 768px) {
+    padding: 16px;
+    font-size: 14px;
   }
 `;

@@ -16,6 +16,9 @@ import {
 `;
 
 export const ModalBody = styled.div`
+  /* width: 80%; Задайте ширину по вашему усмотрению */
+  max-height: 80vh; /* Задайте максимальную высоту вьюпорта */
+  overflow-y: auto; /* Добавьте вертикальный скроллинг при необходимости */
   position: relative;
   width: 560px;
   background-color: var(--main-bgr-color);

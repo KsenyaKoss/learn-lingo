@@ -20,7 +20,6 @@ const LoginModal = ({ view, closeModal }) => {
   const auth = getAuth();
 
   const newUser = ({ name, email, password }) => {
-    console.log(name, email, password);
     if (view === "loginView") {
       signInWithEmailAndPassword(auth, email, password)
         .then(({user}) => {
@@ -55,7 +54,6 @@ const LoginModal = ({ view, closeModal }) => {
               })
             );
           }).catch((profileError) => {
-            // Обработка ошибки при добавлении имени к профилю.
           })})
         .catch((error) => {
           const errorCode = error.code;
