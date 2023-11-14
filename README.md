@@ -25,3 +25,31 @@ ___Private page "Favorites":___ This page is only available to authorized users.
 [Link to Figma mockup](https://www.figma.com/file/dewf5jVviSTuWMMyU3d8Mc/%D0%9F%D0%B5%D1%82-%D0%BF%D1%80%D0%BE%D1%94%D0%BA%D1%82-%D0%B4%D0%BB%D1%8F-%D0%9A%D0%A6?type=design&node-id=0-1&mode=design&t=jCmjSs9PeOjObYSc-0)
 
 [Link to TT](https://docs.google.com/document/d/1ZB_MFgnnJj7t7OXtv5hESSwY6xRgVoACZKzgZczWc3Y/edit)
+
+
+# Technical performance
+___
+
+ + ## Authorization: 
+    The app will use Firebase for registration, login, current user data, and logout.
+
+ + ## Forms: 
+    Forms for registration/authorization and validation of their fields are implemented using formik & yup libraries.
+
+ + ## Database:
+    Firebase Realtime Database is used to store information about teachers. Information about instructors includes their first name, last name, languages, skill levels, rating, reviews, hourly price, number of classes, avatar URL, class information, terms and experience.  
+
+ + ## Modal windows:
+    Windows for registration, login, reservation and warning about unauthorized access are implemented as modal windows. They will close when you click on the "cross", on a darkened background or when you press the Esc key. 
+
+ + ## Functionality of selected:
+    Authorized users will be able to add and remove teachers to/from their "favorites". The heart-button will change color when a teacher is added or removed. Information about the selected teacher will remain even if the user refreshes the page.  
+
+ + ## Functionality "Read more":
+    Users will be able to reveal additional information about the teacher and view feedback from his students using the "Read more" button.  
+
+ + ## Routing:
+    The React Router library will be used to navigate between pages.   
+
+ + ## Filtration:
+    The ability to filter teachers by teaching language, level of knowledge and price per hour will be added. 
