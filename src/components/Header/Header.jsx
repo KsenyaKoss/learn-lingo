@@ -14,11 +14,13 @@ import useAuth from "../../hooks/use-auth";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../redux/Auth/authSlice";
 
+
 const Header = () => {
   const [modalView, setModalView] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isAuth } = useAuth();
   const dispatch = useDispatch();
+  
 
   const openModal = (param) => {
     setModalView(param);
@@ -32,7 +34,7 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <Logo />
+      <Logo/>
       <Navigation />
       <AuthButtons>
         {isAuth ? (
