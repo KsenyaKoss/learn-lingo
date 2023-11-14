@@ -2,14 +2,21 @@ import { useFormik } from "formik";
 import {
   StyledError,
   StyledEyeIcon,
+  StyledEyeIconVisible,
   StyledForm,
   StyledInput,
   StyledInputWrp,
   StyledSubmitButton,
 } from "./FormStyed";
 import { yupSchemaSigUp, yupSchemaLogIn } from "../yupValidationSchema";
+import { useState } from "react";
 
 const Form = ({ view, user, closeModal }) => {
+  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+  const handleTogglePassword = (evt) => {
+    evt.preventDefault();
+    setIsVisiblePassword(!isVisiblePassword);
+  };
   const {
     values,
     touched,
@@ -76,7 +83,7 @@ const Form = ({ view, user, closeModal }) => {
       <StyledInputWrp>
         <StyledInputWrp>
           <StyledInput
-            type="password"
+            type={isVisiblePassword ? "text" : "password"}
             name="password"
             value={values.password}
             onChange={handleChange}
@@ -94,7 +101,11 @@ const Form = ({ view, user, closeModal }) => {
             <StyledError className="error">{errors.password}</StyledError>
           )}
         </StyledInputWrp>
-        <StyledEyeIcon />
+        {isVisiblePassword ? (
+          <StyledEyeIconVisible onClick={handleTogglePassword} />
+        ) : (
+          <StyledEyeIcon onClick={handleTogglePassword} />
+        )}
       </StyledInputWrp>
       <StyledSubmitButton disabled={isSubmitting} type="submit">
         {view === "loginView" ? "Log In" : "Sign Up"}

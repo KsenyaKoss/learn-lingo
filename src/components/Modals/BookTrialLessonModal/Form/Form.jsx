@@ -1,7 +1,9 @@
-import { Formik} from "formik";
+import { Formik } from "formik";
 import {
   FormStyled,
   RadioButtonsWrp,
+  StyledError,
+  StyledFieldWrp,
   StyledInputField,
   StyledInputWrp,
   StyledRadioButtonTitle,
@@ -15,8 +17,7 @@ import {
 } from "react-icons/md";
 import { trialLessonFormSchema } from "../yupValidationSchema";
 
-
-const FormTrialLesson = () => {
+const FormTrialLesson = ({ closeModal }) => {
   return (
     <div>
       <Formik
@@ -26,14 +27,21 @@ const FormTrialLesson = () => {
           email: "",
           phoneNumber: "",
         }}
-        
         validationSchema={trialLessonFormSchema}
         onSubmit={(values, actions) => {
           console.log(values);
           actions.resetForm();
+          closeModal();
         }}
       >
-        {({ values, errors, touched, setFieldTouched, handleChange, handleSubmit}) => (
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleSubmit,
+          isSubmitting,
+        }) => (
           <FormStyled onSubmit={handleSubmit}>
             <div>
               <StyledRadioButtonTitle>
@@ -41,7 +49,7 @@ const FormTrialLesson = () => {
               </StyledRadioButtonTitle>
               <RadioButtonsWrp role="group" aria-labelledby="my-radio-group">
                 <StyledRadioLabel>
-                  {values.picked === "careerAndBusiness"? (
+                  {values.picked === "careerAndBusiness" ? (
                     <MdOutlineRadioButtonChecked color="var(--orange)" />
                   ) : (
                     <MdOutlineRadioButtonUnchecked color="var(--orange)" />
@@ -54,7 +62,7 @@ const FormTrialLesson = () => {
                   Career and business
                 </StyledRadioLabel>
                 <StyledRadioLabel>
-                {values.picked === "lessonForKids"? (
+                  {values.picked === "lessonForKids" ? (
                     <MdOutlineRadioButtonChecked color="var(--orange)" />
                   ) : (
                     <MdOutlineRadioButtonUnchecked color="var(--orange)" />
@@ -68,16 +76,20 @@ const FormTrialLesson = () => {
                   Lesson for kids
                 </StyledRadioLabel>
                 <StyledRadioLabel>
-                {values.picked === "livingAbroad"? (
+                  {values.picked === "livingAbroad" ? (
                     <MdOutlineRadioButtonChecked color="var(--orange)" />
                   ) : (
                     <MdOutlineRadioButtonUnchecked color="var(--orange)" />
                   )}
-                  <StyledRadioField type="radio" name="picked" value="livingAbroad" />
+                  <StyledRadioField
+                    type="radio"
+                    name="picked"
+                    value="livingAbroad"
+                  />
                   Living abroad
                 </StyledRadioLabel>
                 <StyledRadioLabel>
-                {values.picked === "examsAndCoursework"? (
+                  {values.picked === "examsAndCoursework" ? (
                     <MdOutlineRadioButtonChecked color="var(--orange)" />
                   ) : (
                     <MdOutlineRadioButtonUnchecked color="var(--orange)" />
@@ -90,7 +102,7 @@ const FormTrialLesson = () => {
                   Exams and coursework
                 </StyledRadioLabel>
                 <StyledRadioLabel>
-                {values.picked === "cultureTravelHobby"? (
+                  {values.picked === "cultureTravelHobby" ? (
                     <MdOutlineRadioButtonChecked color="var(--orange)" />
                   ) : (
                     <MdOutlineRadioButtonUnchecked color="var(--orange)" />
@@ -102,16 +114,85 @@ const FormTrialLesson = () => {
                   />
                   Culture, travel or hobby
                 </StyledRadioLabel>
+                {errors.picked && (
+                  <StyledError className="error">{errors.picked}</StyledError>
+                )}
               </RadioButtonsWrp>
             </div>
             <StyledInputWrp>
-              <StyledInputField name="fullName" placeholder="Full Name" />
-           
-              <StyledInputField name="email" placeholder="Email" />
-              <StyledInputField name="phoneNumber" placeholder="Phone number" />
+              <StyledFieldWrp>
+                <StyledInputField
+                  name="fullName"
+                  placeholder="Full Name"
+                  type="text"
+                  value={values.fullName}
+                  onChange={handleChange}
+                  className={
+                    touched.fullName && !errors.fullName
+                      ? "valid"
+                      : touched.fullName && errors.fullName
+                      ? "invalid"
+                      : ""
+                  }
+                />
+                {touched.fullName && errors.fullName && (
+                  <StyledError className="error">{errors.fullName}</StyledError>
+                )}
+              </StyledFieldWrp>
+              <StyledFieldWrp>
+                <StyledInputField
+                  name="email"
+                  placeholder="Email"
+                  type="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  className={
+                    touched.email && !errors.email
+                      ? "valid"
+                      : touched.email && errors.email
+                      ? "invalid"
+                      : ""
+                  }
+                />
+                {touched.email && errors.email && (
+                  <StyledError className="error">{errors.email}</StyledError>
+                )}
+              </StyledFieldWrp>
+              <StyledFieldWrp>
+                <StyledInputField
+                  name="phoneNumber"
+                  placeholder="Phone number"
+                  type="phone"
+                  value={values.phoneNumber}
+                  onChange={handleChange}
+                  className={
+                    touched.phoneNumber && !errors.phoneNumber
+                      ? "valid"
+                      : touched.phoneNumber && errors.phoneNumber
+                      ? "invalid"
+                      : ""
+                  }
+                />
+                {touched.phoneNumber && errors.phoneNumber && (
+                  <StyledError className="error">
+                    {errors.phoneNumber}
+                  </StyledError>
+                )}
+              </StyledFieldWrp>
             </StyledInputWrp>
 
-            <SubmitButtonStyled type="submit">Book</SubmitButtonStyled>
+            <SubmitButtonStyled
+              disabled={
+                isSubmitting ||
+                values.picked === "" ||
+                values.fullName === "" ||
+                values.email === "" ||
+                values.phoneNumber === ""
+              }
+              type="submit"
+            >
+              Book
+            </SubmitButtonStyled>
           </FormStyled>
         )}
       </Formik>

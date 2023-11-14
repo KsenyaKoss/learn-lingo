@@ -10,7 +10,7 @@ Currently, two official plugins are available:
 
 # Discription 
 ___
--  ___"LearnLingo"___ is an application of a company that provides online language learning services. The main purpose of the application is to help users find and choose a suitable teacher for their educational needs. The layout is responsive, covering the range from 320px to 1440px, that is, the pages automatically adapt to different device screen sizes.
+ ___"LearnLingo"___ is an application of a company that provides online language learning services. The main purpose of the application is to help users find and choose a suitable teacher for their educational needs. The layout is responsive, covering the range from 320px to 1440px, that is, the pages automatically adapt to different device screen sizes.
   
 ![LOGO](src/assets/images/bgrPicture-orange.png)
 

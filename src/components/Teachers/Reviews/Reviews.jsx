@@ -4,7 +4,6 @@ import User from "../../../assets/user.jsx"
 import { CommentStyled, ImgWrp, MoreInfoWrp, NameStyled, NameWrp, RatingWrp } from "./ReviewsStyled";
 
 const Reviews = ({ el }) => {
-  console.log(el);
   const { comment, reviewer_name, reviewer_rating } = el;
 
   return (

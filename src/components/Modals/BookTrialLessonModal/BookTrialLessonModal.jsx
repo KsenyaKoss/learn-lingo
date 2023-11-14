@@ -7,10 +7,7 @@ const BookTrialLessonModal = ({teacher, onClose}) => {
 
   useEffect(() => {
     const body = document.body;
-    // Блокируем скроллинг фона при открытии модалки
     body.style.overflow = "hidden";
-
-    // Убираем блокировку скроллинга при закрытии модалки
     return () => {
       body.style.overflow = "visible";
     };
@@ -51,7 +48,7 @@ const BookTrialLessonModal = ({teacher, onClose}) => {
         <StyledNameTeacher>{`${name} ${surname}`}</StyledNameTeacher>
        </div>
      </TeacherWrp>
-     <FormTrialLesson/>
+     <FormTrialLesson closeModal={onClose}/>
       </ModalBody>
     </Overlay>
   );

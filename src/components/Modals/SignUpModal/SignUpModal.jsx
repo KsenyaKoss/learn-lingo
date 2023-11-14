@@ -4,7 +4,6 @@ import {
   ModalBody,
   Overlay,
   StyledIconClose,
-  StyledP,
   StyledTitle,
 } from "./LoginModalStyled";
 

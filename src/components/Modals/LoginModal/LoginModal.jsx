@@ -3,7 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
 import {
   ModalBody,
@@ -14,6 +14,7 @@ import {
 } from "./LoginModalStyled";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../redux/Auth/authSlice";
+import Notiflix from "notiflix";
 
 const LoginModal = ({ view, closeModal }) => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const LoginModal = ({ view, closeModal }) => {
   const newUser = ({ name, email, password }) => {
     if (view === "loginView") {
       signInWithEmailAndPassword(auth, email, password)
-        .then(({user}) => {
+        .then(({ user }) => {
           dispatch(
             setUser({
               name: user.displayName,
@@ -33,33 +34,36 @@ const LoginModal = ({ view, closeModal }) => {
           );
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          Notiflix.Notify.failure(error.message);
         });
     } else {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           const displayName = name;
-         console.log(user, displayName);
+          console.log(user, displayName);
           updateProfile(user, {
             displayName: displayName,
-          }).then(()=> {
-            dispatch(
-              setUser({
-                name: user.displayName,
-                email: user.email,
-                token: user.accessToken,
-                id: user.uid,
-              })
-            );
-          }).catch((profileError) => {
-          })})
+          })
+            .then(() => {
+              dispatch(
+                setUser({
+                  name: user.displayName,
+                  email: user.email,
+                  token: user.accessToken,
+                  id: user.uid,
+                })
+              );
+            })
+            .catch((profileError) => {
+              Notiflix.Notify.failure(profileError.message);
+            });
+        })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          Notiflix.Notify.failure(error.message);
         });
-  }}
+    }
+  };
   return (
     <Overlay>
       <ModalBody>

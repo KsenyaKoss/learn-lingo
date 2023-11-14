@@ -50,6 +50,13 @@ export const StyledEyeIcon = styled(AiOutlineEyeInvisible)`
   transform: translateY(-50%);
 `;
 
+export const StyledEyeIconVisible = styled(AiOutlineEye)`
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+`;
+
 export const StyledError = styled.p`
   margin-top: 8px;
   font-size: 12px;
